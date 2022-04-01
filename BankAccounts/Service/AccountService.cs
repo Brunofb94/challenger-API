@@ -1,13 +1,13 @@
 namespace BankAccounts.Service
 {
-    public class AccountService 
+    public class AccountService
     {
         private models.BankAccountContext ctx = new models.BankAccountContext();
         public void saveAccount(models.Account conta)
         {
             ctx.Add(conta);
             ctx.SaveChanges();
-            
+
         }
         public List<models.Account> ListAllAccount()
         {
@@ -42,5 +42,27 @@ namespace BankAccounts.Service
             ctx.SaveChanges();
         }
 
+        public string RetirarGrana(models.Account account, int id)
+        {
+            models.Account current = ctx.Accounts.First(x => x.Id == id);
+            current.Balance = account.Balance;
+
+            if (account.Balance > current.Balance)
+            {
+                return " Saldo Insuficiente!";
+            }
+            else
+            {
+                ctx.SaveChanges();
+                return "Valor Retirado!";
+            }
+        }
+        public string Depositar(models.Account account, int id) {
+            models.Account current = ctx.Accounts.First(x => x.Id == id);
+            current.Balance += account.Balance;
+          
+             return "Valor Depositado!";
+            
+        }
     }
 }

@@ -9,11 +9,20 @@ namespace BankAccounts.Controllers
         private Service.ContaCorrenteService service = new Service.ContaCorrenteService();
 
         [HttpPost]
-        public void Salvar(models.ContaCorrente conta)
+        public string Salvar(models.ContaCorrente conta)
         {
-            service.Cadastrar(conta);
+            if (conta.IdAccount == null || conta.IdAccount.Equals(" "))
+            {
+                return "Informe um ID válido";
+            }
+            else
+            {
+                service.Cadastrar(conta);
+                return "Conta corrente Criada com Sucesso!";
+            }
+
         }
-        
+
         [HttpGet]
         public List<models.ContaCorrente> ListAllAccountCorrente()
         {

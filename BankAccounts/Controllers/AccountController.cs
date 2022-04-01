@@ -32,6 +32,16 @@ namespace BankAccounts.Controllers
 
             service.UpdateAccount(account, id);
         }
+        [HttpPut("sacar/{id}")]
+        public void Sacar(models.Account account, int id)
+        {
+            service.RetirarGrana(account, id);
+        }
+        [HttpPut("depositar/{id}")]
+        public void Depositar(models.Account account, int id)
+        {
+            service.Depositar(account, id);
+        }
         [HttpDelete("{id}")]
         public void RemoveAccount(int id)
         {
