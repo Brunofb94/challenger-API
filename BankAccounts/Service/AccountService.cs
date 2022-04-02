@@ -45,7 +45,6 @@ namespace BankAccounts.Service
         public string RetirarGrana(models.Account account, int id)
         {
             models.Account current = ctx.Accounts.First(x => x.Id == id);
-            current.Balance = account.Balance;
 
             if (account.Balance > current.Balance)
             {
@@ -53,16 +52,19 @@ namespace BankAccounts.Service
             }
             else
             {
+                current.Balance = current.Balance - account.Balance;
+
                 ctx.SaveChanges();
                 return "Valor Retirado!";
             }
         }
-        public string Depositar(models.Account account, int id) {
+        public string Depositar(models.Account account, int id)
+        {
             models.Account current = ctx.Accounts.First(x => x.Id == id);
-            current.Balance += account.Balance;
-          
-             return "Valor Depositado!";
-            
+            current.Balance = current.Balance + account.Balance;
+            ctx.SaveChanges();
+            return "Valor Depositado!";
+
         }
     }
 }
