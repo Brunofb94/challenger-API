@@ -27,7 +27,7 @@ namespace BankAccounts.models
         public int NumberAccount { get; set; }
         
         [Column("balance", TypeName = "double(10,2)")]
-        public double? Balance { get; set; }
+        public double Balance { get; set; }
 
         [InverseProperty("IdAccountNavigation")]
         public virtual ICollection<ContaCorrente> ContaCorrentes { get; set; }

@@ -35,12 +35,15 @@ namespace BankAccounts.Controllers
         [HttpPut("sacar/{id}")]
         public void Sacar(models.Account account, int id)
         {
-            service.RetirarGrana(account, id);
+            double valor = account.Balance;
+
+            service.RetirarGrana(valor, id);
         }
         [HttpPut("depositar/{id}")]
         public void Depositar(models.Account account, int id)
         {
-            service.Depositar(account, id);
+            double valor = account.Balance;
+            service.Depositar(valor, id);
         }
         [HttpDelete("{id}")]
         public void RemoveAccount(int id)

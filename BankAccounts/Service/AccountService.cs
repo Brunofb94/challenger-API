@@ -42,26 +42,26 @@ namespace BankAccounts.Service
             ctx.SaveChanges();
         }
 
-        public string RetirarGrana(models.Account account, int id)
+        public string RetirarGrana(double valor, int id)
         {
             models.Account current = ctx.Accounts.First(x => x.Id == id);
 
-            if (account.Balance > current.Balance)
+            if (valor > current.Balance)
             {
-                return " Saldo Insuficiente!";
+                return "Saldo Insuficiente!";
             }
             else
             {
-                current.Balance = current.Balance - account.Balance;
+                current.Balance = current.Balance - valor;
 
                 ctx.SaveChanges();
                 return "Valor Retirado!";
             }
         }
-        public string Depositar(models.Account account, int id)
+        public string Depositar(double valor, int id)
         {
             models.Account current = ctx.Accounts.First(x => x.Id == id);
-            current.Balance = current.Balance + account.Balance;
+            current.Balance = current.Balance + valor;
             ctx.SaveChanges();
             return "Valor Depositado!";
 
