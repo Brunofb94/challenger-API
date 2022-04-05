@@ -1,4 +1,12 @@
 # challenger-API
+
+rodar o projeto 
+acessar a pasta cd BankAccounts 
+rodar o projeto dotnet run  
+
+acessar a pasta cd TestBankAccounts
+rodar o projeto dotnet teste 
+
 Criação de api com crud 
 
 API simples para uma criação de conta bancária, focada apenas em conceitos básicos de api em dotnet.
