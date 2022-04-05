@@ -4,10 +4,18 @@ namespace BankAccounts.Service
     {
         private models.BankAccountContext ctx = new models.BankAccountContext();
 
-        public void Cadastrar(models.ContaCorrente conta)
+        public bool Cadastrar(models.ContaCorrente conta)
         {
-            ctx.Add(conta);
-            ctx.SaveChanges();
+            var id_verify = ctx.Accounts.Find(conta.IdAccount);
+            if(id_verify != null) {
+                ctx.Add(conta);
+                ctx.SaveChanges();
+                return true;
+            }
+            else {
+                return false;
+            }
+            
         }
          public List<models.ContaCorrente> ListAllAccountCorrente()
         {

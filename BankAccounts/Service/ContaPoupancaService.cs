@@ -4,10 +4,20 @@ namespace BankAccounts.Service
     {
         private models.BankAccountContext ctx = new models.BankAccountContext();
 
-        public void saveAccount(models.ContaPoupanca conta)
+        public bool saveAccount(models.ContaPoupanca conta)
         {
-            ctx.Add(conta);
-            ctx.SaveChanges();
+            var id_verify = ctx.Accounts.Find(conta.IdAccount);
+            if (id_verify != null)
+            {
+                ctx.Add(conta);
+                ctx.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
         }
 
         public List<models.ContaPoupanca> ListAllAccountPoupanca()

@@ -11,6 +11,7 @@ namespace BankAccounts.Service
         }
         public List<models.Account> ListAllAccount()
         {
+
             List<models.Account> accounts = ctx.Accounts.ToList();
             return accounts;
         }
@@ -21,25 +22,47 @@ namespace BankAccounts.Service
             return accounts;
         }
 
-        public void UpdateAccount(models.Account account, int id)
+        public string UpdateAccount(models.Account account, int id)
         {
 
-            models.Account current = ctx.Accounts.First(x => x.Id == id);
-            current.Agency = account.Agency;
-            current.StartAccount = account.StartAccount;
-            current.NumberAccount = account.NumberAccount;
-            current.Balance = account.Balance;
-            current.ContaPoupancas = account.ContaPoupancas;
-            current.ContaCorrentes = account.ContaCorrentes;
+            var id_verify = ctx.Accounts.Find(id);
+            if (id_verify != null)
+            {
+                models.Account current = ctx.Accounts.First(x => x.Id == id);
+                current.Agency = account.Agency;
+                current.StartAccount = account.StartAccount;
+                current.NumberAccount = account.NumberAccount;
+                current.Balance = account.Balance;
+                current.ContaPoupancas = account.ContaPoupancas;
+                current.ContaCorrentes = account.ContaCorrentes;
+                ctx.SaveChanges();
+                return "Dados Bancários Atualizados!";
 
-            ctx.SaveChanges();
+            }
+            else
+            {
+                return "Conta não Existente!";
+            }
+
+
+
         }
 
-        public void RemoveAccount(int id)
+        public bool RemoveAccount(int id)
         {
-            models.Account account = ctx.Accounts.First(x => x.Id == id);
-            ctx.Remove(account);
-            ctx.SaveChanges();
+            var id_verify = ctx.Accounts.Find(id);
+            if (id_verify != null)
+            {
+                models.Account account = ctx.Accounts.First(x => x.Id == id);
+                ctx.Remove(account);
+                ctx.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
         }
 
         public string RetirarGrana(double valor, int id)
